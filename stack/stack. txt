@@ -1,0 +1,28 @@
+type Stack struct {
+    data []int
+}
+
+func (s *Stack) Push(val int) {
+    s.data = append(s.data, val)
+}
+
+func (s *Stack) Pop() int {
+    if len(s.data) == 0 {
+        return -1 
+    }
+    lastIndex := len(s.data) - 1
+    val := s.data[lastIndex]
+    s.data = s.data[:lastIndex]
+    return val
+}
+
+func (s *Stack) Peek() int {
+    if len(s.data) == 0 {
+        return -1 
+    }
+    return s.data[len(s.data)-1]
+}
+
+func (s *Stack) IsEmpty() bool {
+    return len(s.data) == 0
+}
