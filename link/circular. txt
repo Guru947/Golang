@@ -1,0 +1,51 @@
+type Node struct {
+    data int
+    next *Node
+}
+
+type CircularLinkedList struct {
+    head *Node
+    tail *Node
+}
+
+func (list *CircularLinkedList) Add(data int) {
+    newNode := &Node{data: data}
+    if list.head == nil {
+        list.head = newNode
+        list.tail = newNode
+        newNode.next = newNode
+    } else {
+        newNode.next = list.head
+        list.tail.next = newNode
+        list.tail = newNode
+    }
+}
+
+func (list *CircularLinkedList) Remove(node *Node) {
+    if node == list.head {
+        list.head = node.next
+    }
+    prevNode := list.head
+    for prevNode.next != node {
+        prevNode = prevNode.next
+    }
+    prevNode.next = node.next
+    if node == list.tail {
+        list.tail = prevNode
+    }
+}
+
+func (list *CircularLinkedList) Print() {
+    if list.head == nil {
+        return
+    }
+    node := list.head
+    for {
+        fmt.Print(node.data, " ")
+        node = node.next
+        if node == list.head {
+            break
+        }
+    }
+    fmt.Println()
+}

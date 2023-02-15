@@ -1,0 +1,44 @@
+type Node struct {
+    data int
+    prev *Node
+    next *Node
+}
+
+type DoublyLinkedList struct {
+    head *Node
+    tail *Node
+}
+
+func (list *DoublyLinkedList) Add(data int) {
+    newNode := &Node{data: data}
+    if list.head == nil {
+        list.head = newNode
+        list.tail = newNode
+    } else {
+        list.tail.next = newNode
+        newNode.prev = list.tail
+        list.tail = newNode
+    }
+}
+
+func (list *DoublyLinkedList) Remove(node *Node) {
+    if node == list.head {
+        list.head = node.next
+    } else {
+        node.prev.next = node.next
+    }
+    if node == list.tail {
+        list.tail = node.prev
+    } else {
+        node.next.prev = node.prev
+    }
+}
+
+func (list *DoublyLinkedList) Print() {
+    node := list.head
+    for node != nil {
+        fmt.Print(node.data, " ")
+        node = node.next
+    }
+    fmt.Println()
+}
