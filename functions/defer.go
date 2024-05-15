@@ -6,6 +6,8 @@ func main() {
 	a()
 	defer b()
 	defer c()
+	fmt.Println("I am inside vs code")
+
 }
 
 func c() {
